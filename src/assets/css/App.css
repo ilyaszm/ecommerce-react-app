@@ -1,0 +1,32 @@
+/*  Root variables  */
+:root {
+    --mainGrey:     #403d39;
+    --lightGrey:    #ccc5b9;
+    --mainWhite:    #fffcf2;
+    --mainDark:     #252422;
+    --mainOrange:   #eb5e28;
+    
+    --oswaldFont:   'Oswald', sans-serif;
+    --farroFont:    'Farro', sans-serif;
+}
+
+/*  General CSS  */
+body {
+    font-family:    var(--oswaldFont);
+    background:     var(--mainWhite);
+    color:          var(--mainDark)
+}
+
+.text-title {
+    font-family: var(--farroFont);
+    letter-spacing: .3rem;
+    text-transform: uppercase
+}
+
+.text-blue {
+    color: var(--mainBlue)
+}
+
+.text-bright {
+    color: var(--lightBlue)
+}

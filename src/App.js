@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
-import Navbar from './components/Navbar'
-import ProductList from './components/ProductList'
-import Details from './components/Details'
-import Cart from './components/Cart'
-import Default from './components/Default'
+import Navbar from './components/layouts/Navbar'
+import ProductList from './components/layouts/ProductList'
+import Details from './components/layouts/Details'
+import Cart from './components/layouts/Cart'
+import Default from './components/layouts/Default'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './assets/css/App.css'

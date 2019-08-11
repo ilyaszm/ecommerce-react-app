@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { ButtonContainer } from '../elements/Button'
 
-import logo from '../../assets/img/logo.png'
+import logo from '../../assets/logo.png'
 
 export default class Navbar extends Component {
     render() {

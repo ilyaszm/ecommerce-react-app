@@ -48,7 +48,10 @@ export default class Details extends Component {
                                         // check if the product is in Cart to set it to true,
                                         // if not, set it to false
                                         disabled={ inCart ? true : false }
-                                        onClick={() => { value.addToCart(id)}}
+                                        onClick={() => {
+                                            value.addToCart(id)
+                                            value.openModal(id)
+                                        }}
                                         >
                                             {/* set inCart text to "in cart" if the product in Cart,
                                                 if not, set the text to "add to cart" */}

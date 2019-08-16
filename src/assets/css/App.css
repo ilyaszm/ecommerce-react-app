@@ -30,3 +30,9 @@ body {
 .text-bright {
     color: var(--lightGrey)
 }
+
+.cart-icon {
+    cursor: pointer;
+    font-size: .8rem;
+    color: var(--mainOrange)
+}

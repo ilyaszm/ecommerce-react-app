@@ -84,11 +84,31 @@ class ProductProvider extends Component {
         })
     }
 
-    // close modal after clicking on "back to products" and "go to cart" buttons
+    // Close modal after clicking on "back to products" and "go to cart" buttons
     closeModal = () => {
         this.setState(() => {
             return { modalOpen: false }
         })
+    }
+
+    // 
+    increment = (id) => {
+        console.log('increment')
+    }
+
+    // 
+    decrement = (id) => {
+        console.log('decrement')
+    }
+
+    // 
+    removeItem = (id) => {
+        console.log('remove')
+    }
+
+    // 
+    clearCart = () => {
+        console.log('clear')
     }
 
     render() {
@@ -98,7 +118,11 @@ class ProductProvider extends Component {
                 handleDetail: this.handleDetail,
                 addToCart   : this.addToCart,
                 openModal   : this.openModal,
-                closeModal  : this.closeModal
+                closeModal  : this.closeModal,
+                increment   : this.increment,
+                decrement   : this.decrement,
+                removeItem  : this.removeItem,
+                clearCart   : this.clearCart
             }}>
                 { this.props.children }
             </ProductContext.Provider>

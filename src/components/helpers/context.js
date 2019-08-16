@@ -70,7 +70,7 @@ class ProductProvider extends Component {
         this.setState(() => {
             return {
                 products: tempProducts,
-                cart: [...this.state.cart, product]
+                cart    : [...this.state.cart, product]
             }
         },
         // set the callback function to addTotals() when submitting a product to Cart
@@ -97,16 +97,81 @@ class ProductProvider extends Component {
         })
     }
 
-    increment = (id) => {
-        console.log('increment')
+    increment = id => {
+        let tempCart = [...this.state.cart]
+        // look for item that has been selected
+        const selectedProduct = tempCart.find(item => item.id === id)
+
+        // get index of the item
+        const index = tempCart.indexOf(selectedProduct)
+        let product = tempCart[index]
+
+        product.count += 1
+        // calculate the total
+        product.total = product.count * product.price
+
+        this.setState(() => {
+            return { cart: [...tempCart]}
+        },
+        () => {
+            // reCalculate the totals
+            this.addTotals()
+        })
     }
 
-    decrement = (id) => {
-        console.log('decrement')
+    decrement = id => {
+        let tempCart = [...this.state.cart]
+        // look for item that has been selected
+        const selectedProduct = tempCart.find(item => item.id === id)
+
+        // get index of the item
+        const index = tempCart.indexOf(selectedProduct)
+        let product = tempCart[index]
+
+        product.count -= 1
+
+        // 
+        if (product.count === 0)
+            this.removeItem(id)
+        else {
+            product.total = product.count * product.price
+            
+            this.setState(() => {
+                return { cart: [...tempCart]}
+            },
+            () => {
+                // reCalculate the totals
+                this.addTotals()
+            })
+        }
     }
 
-    removeItem = (id) => {
-        console.log('remove')
+    removeItem = id => {
+        let tempProducts = [...this.state.products]
+        let tempCart = [...this.state.cart]
+
+        // filter items that doesn't have the ID which is passed in the function argument
+        tempCart = tempCart.filter(item => item.id !== id)
+
+        // get index of the item
+        const index = tempProducts.indexOf(this.getItem(id))
+        let removeProduct = tempProducts[index]
+
+        // remove item from cart
+        removeProduct.inCart = false
+        removeProduct.count = 0
+        removeProduct.total = 0
+
+        this.setState(() => {
+            return {
+                cart    : [...tempCart],
+                products: [...tempProducts]
+            }
+        },
+        () => {
+            // reCalculate the totals
+            this.addTotals()
+        })
     }
 
     clearCart = () => {
@@ -116,7 +181,7 @@ class ProductProvider extends Component {
         () => {
             // set products to the default state
             this.setProducts()
-            // set totals to default (0)
+            // reCalculate the totals
             this.addTotals()
         })
     }
@@ -131,6 +196,7 @@ class ProductProvider extends Component {
         //const tax = parseFloat(tempTax.toFixed(2))
         const tax = subTotal * .1
         const total = subTotal + tax
+
         this.setState(() => {
             return {
                 cartSubTotal: subTotal,

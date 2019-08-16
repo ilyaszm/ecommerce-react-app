@@ -10,7 +10,10 @@ class ProductProvider extends Component {
         detailProduct: detailProduct,
         cart: [],
         modalOpen: false,
-        modalProduct: detailProduct
+        modalProduct: detailProduct,
+        cartSubTotal: 0,
+        cartTax: 0,
+        cartTotal: 0
     }
 
     componentDidMount() {
@@ -59,6 +62,7 @@ class ProductProvider extends Component {
         // get product ID and set it to an index
         const index = tempProducts.indexOf(this.getItem(id))
         const product = tempProducts[index]
+
         product.inCart = true
         product.count = 1
         const price = product.price
@@ -66,8 +70,9 @@ class ProductProvider extends Component {
         this.setState(() => {
             return { products: tempProducts, cart: [...this.state.cart, product] }
         },
+        // set the callback function to addTotals() when submitting a product to Cart
         () => {
-            console.log(this.state)
+            this.addTotals()
         })
     }
 
@@ -109,6 +114,25 @@ class ProductProvider extends Component {
     // 
     clearCart = () => {
         console.log('clear')
+    }
+
+    // 
+    addTotals = () => {
+        let subTotal = 0
+        // add total of products in Cart
+        this.state.cart.map(item => (subTotal += item.total))
+        
+        //const tempTax = subTotal * .1
+        //const tax = parseFloat(tempTax.toFixed(2))
+        const tax = subTotal * .1
+        const total = subTotal + tax
+        this.setState(() => {
+            return {
+                cartSubTotal: subTotal,
+                cartTax     : tax,
+                cartTotal   : total
+            }
+        })
     }
 
     render() {

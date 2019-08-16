@@ -68,7 +68,10 @@ class ProductProvider extends Component {
         const price = product.price
         product.total = price
         this.setState(() => {
-            return { products: tempProducts, cart: [...this.state.cart, product] }
+            return {
+                products: tempProducts,
+                cart: [...this.state.cart, product]
+            }
         },
         // set the callback function to addTotals() when submitting a product to Cart
         () => {
@@ -76,7 +79,6 @@ class ProductProvider extends Component {
         })
     }
 
-    // Open modal after clicking on a product
     openModal = id => {
         // get ID of the product
         const product = this.getItem(id)
@@ -89,31 +91,34 @@ class ProductProvider extends Component {
         })
     }
 
-    // Close modal after clicking on "back to products" and "go to cart" buttons
     closeModal = () => {
         this.setState(() => {
             return { modalOpen: false }
         })
     }
 
-    // 
     increment = (id) => {
         console.log('increment')
     }
 
-    // 
     decrement = (id) => {
         console.log('decrement')
     }
 
-    // 
     removeItem = (id) => {
         console.log('remove')
     }
 
-    // 
     clearCart = () => {
-        console.log('clear')
+        this.setState(() => {
+            return { cart: [] }
+        },
+        () => {
+            // set products to the default state
+            this.setProducts()
+            // set totals to default (0)
+            this.addTotals()
+        })
     }
 
     // 

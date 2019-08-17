@@ -14,7 +14,7 @@ import './assets/css/App.css'
 class App extends Component {
     render() {
         return (
-            <React.Fragment>
+            <>
                 <Navbar />
                 <Switch>
                     <Route path="/" exact component={ ProductList } />
@@ -23,7 +23,7 @@ class App extends Component {
                     <Route component={ Default } />
                 </Switch>
                 <Modal />
-            </React.Fragment>
+            </>
         )
     }
 }

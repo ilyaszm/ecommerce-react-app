@@ -6,13 +6,13 @@
     --mainDark:     #252422;
     --mainOrange:   #eb5e28;
     
-    --oswaldFont:   'Oswald', sans-serif;
+    --ptSansFont:   'PT Sans', sans-serif;
     --farroFont:    'Farro', sans-serif;
 }
 
 /*  General CSS  */
 body {
-    font-family:    var(--oswaldFont);
+    font-family:    var(--ptSansFont);
     background:     var(--mainWhite);
     color:          var(--mainDark)
 }

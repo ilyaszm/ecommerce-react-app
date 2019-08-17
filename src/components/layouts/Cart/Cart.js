@@ -17,12 +17,12 @@ export default class Cart extends Component {
                         // If the Cart contains items, it will display the Cart table
                         if (cart.length > 0) {
                             return (
-                                <div>
+                                <>
                                     <Title name="Cart" />
                                     <CartColumns />
                                     <CartList value={ value } />
-                                    <CartTotals value={ value } />
-                                </div>
+                                    <CartTotals value={ value } history={ this.props.history} />
+                                </>
                             )
                         }
                         else {

@@ -13,7 +13,8 @@ class ProductProvider extends Component {
         modalProduct: detailProduct,
         cartSubTotal: 0,
         cartTax: 0,
-        cartTotal: 0
+        cartTotal: 0,
+        searchWord: ''
     }
 
     componentDidMount() {
@@ -186,7 +187,7 @@ class ProductProvider extends Component {
         })
     }
 
-    // 
+    // Calculate the total price of products
     addTotals = () => {
         let subTotal = 0
         // add total of products in Cart
@@ -206,6 +207,11 @@ class ProductProvider extends Component {
         })
     }
 
+    // Handle input words to search for products
+    handleChange = e => {
+        this.setState({ searchWord: e.target.value })
+    }
+
     render() {
         return (
             <ProductContext.Provider value={{
@@ -217,7 +223,8 @@ class ProductProvider extends Component {
                 increment   : this.increment,
                 decrement   : this.decrement,
                 removeItem  : this.removeItem,
-                clearCart   : this.clearCart
+                clearCart   : this.clearCart,
+                handleChange: this.handleChange
             }}>
                 { this.props.children }
             </ProductContext.Provider>

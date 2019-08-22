@@ -14,7 +14,8 @@ class ProductProvider extends Component {
         cartSubTotal: 0,
         cartTax: 0,
         cartTotal: 0,
-        searchWord: ''
+        searchWord: '',
+        cartBadge: 0
     }
 
     componentDidMount() {
@@ -68,10 +69,12 @@ class ProductProvider extends Component {
         product.count = 1
         const price = product.price
         product.total = price
+
         this.setState(() => {
             return {
                 products: tempProducts,
-                cart    : [...this.state.cart, product]
+                cart    : [...this.state.cart, product],
+                cartBadge: this.state.cartBadge + 1
             }
         },
         // set the callback function to addTotals() when submitting a product to Cart
@@ -98,6 +101,7 @@ class ProductProvider extends Component {
         })
     }
 
+    // Increment the number of one product
     increment = id => {
         let tempCart = [...this.state.cart]
         // look for item that has been selected
@@ -112,7 +116,7 @@ class ProductProvider extends Component {
         product.total = product.count * product.price
 
         this.setState(() => {
-            return { cart: [...tempCart]}
+            return { cart: [...tempCart] }
         },
         () => {
             // reCalculate the totals
@@ -120,6 +124,7 @@ class ProductProvider extends Component {
         })
     }
 
+    // Decrement the number of one product
     decrement = id => {
         let tempCart = [...this.state.cart]
         // look for item that has been selected
@@ -131,9 +136,10 @@ class ProductProvider extends Component {
 
         product.count -= 1
 
-        // 
-        if (product.count === 0)
+        if (product.count === 0) {
             this.removeItem(id)
+            this.setState(() => { return { cartBadge: this.state.cartBadge - 1 }})
+        }
         else {
             product.total = product.count * product.price
 
@@ -147,6 +153,7 @@ class ProductProvider extends Component {
         }
     }
 
+    // Remove product from Cart
     removeItem = id => {
         let tempProducts = [...this.state.products]
         let tempCart = [...this.state.cart]
@@ -166,7 +173,8 @@ class ProductProvider extends Component {
         this.setState(() => {
             return {
                 cart    : [...tempCart],
-                products: [...tempProducts]
+                products: [...tempProducts],
+                cartBadge: this.state.cartBadge - 1
             }
         },
         () => {
@@ -177,7 +185,10 @@ class ProductProvider extends Component {
 
     clearCart = () => {
         this.setState(() => {
-            return { cart: [] }
+            return {
+                cart: [],
+                cartBadge : 0
+            }
         },
         () => {
             // set products to the default state

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+
 import { ButtonContainer } from '../elements/Button'
+import { ProductConsumer } from '../helpers/context'
 
 import logo from '../../assets/logo.png'
 
@@ -19,14 +21,22 @@ export default class Navbar extends Component {
                         </Link>
                     </li>
                 </ul>
-                <Link to="/cart" className="ml-auto">
-                    <ButtonContainer>
-                        <span className="mr-2">
-                            <i className="fas fa-cart-plus" />
-                        </span>
-                        my cart
-                    </ButtonContainer>
-                </Link>
+                <ProductConsumer>
+                    {value => {
+                        const { cartBadge } = value
+                        return (
+                            <Link to="/cart" className="ml-auto">
+                                <ButtonContainer>
+                                    <span className="mr-2">
+                                        <i className="fas fa-cart-plus" />
+                                        <span class="badge badge-warning">{ cartBadge }</span>
+                                    </span>
+                                    my cart
+                                </ButtonContainer>
+                            </Link>
+                        )
+                    }}
+                </ProductConsumer>
             </NavWrapper>
         )
     }

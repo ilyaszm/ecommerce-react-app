@@ -7,6 +7,7 @@ import Details from './components/layouts/Details'
 import Cart from './components/layouts/Cart'
 import Default from './components/layouts/Default'
 import Modal from './components/elements/Modal'
+import Footer from './components/layouts/Footer'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './assets/css/App.css'
@@ -23,6 +24,7 @@ class App extends Component {
                     <Route component={ Default } />
                 </Switch>
                 <Modal />
+                <Footer />
             </>
         )
     }
